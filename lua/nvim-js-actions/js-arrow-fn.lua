@@ -30,7 +30,7 @@ local function toggle_arrow_vs_function()
   local children = ts_utils.get_named_children(node)
 
   -- Get the current cursor position, to restore after the function is replaced
-	local win = vim.api.nvim_get_current_win()
+  local win = vim.api.nvim_get_current_win()
   local cursor_pos = vim.api.nvim_win_get_cursor(win)
 
   -- Extract the function name, and body, and rest
