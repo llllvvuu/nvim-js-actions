@@ -29,6 +29,10 @@ local function toggle_arrow_vs_function()
   local start_row, start_col, end_row, end_col = node:range()
   local children = ts_utils.get_named_children(node)
 
+  -- Get the current cursor position, to restore after the function is replaced
+  local win = vim.api.nvim_get_current_win()
+  local cursor_pos = vim.api.nvim_win_get_cursor(win)
+
   -- Extract the function name, and body, and rest
   local func_name, body
   local rest = {}
@@ -124,6 +128,9 @@ local function toggle_arrow_vs_function()
       ["end"] = { start_row + #new_func_lines, #new_end_row_text },
     }
   })
+
+  -- Restore cursor position
+  vim.api.nvim_win_set_cursor(win, cursor_pos)
 end
 
 M.toggle = toggle_arrow_vs_function
